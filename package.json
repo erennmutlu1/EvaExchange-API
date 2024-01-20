@@ -1,0 +1,32 @@
+{
+  "name": "supertraders-rest-api",
+  "version": "1.0.0",
+  "description": "SuperTraders-REST-API",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erennmutlu1/EvaExchange-API.git"
+  },
+  "keywords": [
+    "supertraders",
+    "rest-api",
+    "trading-game",
+    "nodejs",
+    "sequelize",
+    "postgreSQL"
+  ],
+  "author": "Eren Mutlu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/erennmutlu1/EvaExchange-API/issues"
+  },
+  "homepage": "https://github.com/erennmutlu1/EvaExchange-API#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sequelize": "^6.35.2",
+    "sequelize-cli": "^6.6.2"
+  }
+}
