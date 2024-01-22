@@ -1,7 +1,6 @@
-// src/routes/index.js
 const express = require('express');
 const router = express.Router();
-const Share = require('../models/Share');
+const { Share } = require('../models');
 
 // Placeholder route
 router.get('/', async (req, res) => {

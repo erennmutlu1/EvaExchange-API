@@ -1,11 +1,17 @@
-// src/index.js
+require('dotenv').config();
 const express = require('express');
 const routes = require('./routes');
+const sequelize = require('./models').sequelize;
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Use the routes defined in src/routes/index.js
+sequelize.sync().then(() => {
+  console.log('Database synced');
+}).catch((error) => {
+  console.error('Error syncing database:', error);
+});
+
 app.use('/', routes);
 
 app.listen(port, () => {
