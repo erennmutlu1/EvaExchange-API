@@ -9,14 +9,14 @@
   "test": {
     "username": "postgres",
     "password": "asdqwe123*",
-    "database": "evaExchangeTest",
+    "database": "evaExchange",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
     "password": "asdqwe123*",
-    "database": "evaExchangeProduction",
+    "database": "evaExchange",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }

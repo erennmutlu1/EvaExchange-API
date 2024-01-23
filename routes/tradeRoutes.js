@@ -4,7 +4,7 @@ const router = express.Router();
 const { Trade } = require('../models');
 
 // Get all trades
-router.get('/trades', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const trades = await Trade.findAll();
     res.json(trades);
@@ -15,7 +15,7 @@ router.get('/trades', async (req, res) => {
 });
 
 // Get a specific trade by ID
-router.get('/trades/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const trade = await Trade.findByPk(id);
@@ -30,10 +30,10 @@ router.get('/trades/:id', async (req, res) => {
 });
 
 // Create a new trade
-router.post('/trades', async (req, res) => {
-  const { symbol, quantity, price, userId } = req.body;
+router.post('/create', async (req, res) => {
+  const { type, quantity, price, shareId } = req.body;
   try {
-    const newTrade = await Trade.create({ symbol, quantity, price, userId });
+    const newTrade = await Trade.create({ type, quantity, price, shareId });
     res.status(201).json(newTrade);
   } catch (error) {
     console.error(error);
@@ -42,15 +42,15 @@ router.post('/trades', async (req, res) => {
 });
 
 // Update an existing trade by ID
-router.put('/trades/:id', async (req, res) => {
+router.put('/update/:id', async (req, res) => {
   const { id } = req.params;
-  const { symbol, quantity, price, userId } = req.body;
+  const { type, quantity, price, shareId } = req.body;
   try {
     const trade = await Trade.findByPk(id);
     if (!trade) {
       return res.status(404).json({ error: 'Trade not found' });
     }
-    await trade.update({ symbol, quantity, price, userId });
+    await trade.update({ type, quantity, price, shareId });
     res.json(trade);
   } catch (error) {
     console.error(error);
@@ -59,7 +59,7 @@ router.put('/trades/:id', async (req, res) => {
 });
 
 // Delete a trade by ID
-router.delete('/trades/:id', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const trade = await Trade.findByPk(id);

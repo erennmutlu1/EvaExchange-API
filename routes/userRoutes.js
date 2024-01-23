@@ -4,7 +4,7 @@ const router = express.Router();
 const { User } = require('../models');
 
 // Get all users
-router.get('/users', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const users = await User.findAll();
     res.json(users);
@@ -15,7 +15,7 @@ router.get('/users', async (req, res) => {
 });
 
 // Get a specific user by ID
-router.get('/users/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const user = await User.findByPk(id);
@@ -30,10 +30,10 @@ router.get('/users/:id', async (req, res) => {
 });
 
 // Create a new user
-router.post('/users', async (req, res) => {
-  const { username, email } = req.body;
+router.post('/create', async (req, res) => {
+  const { username, email, password } = req.body;
   try {
-    const newUser = await User.create({ username, email });
+    const newUser = await User.create({ username, email, password });
     res.status(201).json(newUser);
   } catch (error) {
     console.error(error);
@@ -42,15 +42,15 @@ router.post('/users', async (req, res) => {
 });
 
 // Update an existing user by ID
-router.put('/users/:id', async (req, res) => {
+router.put('/update/:id', async (req, res) => {
   const { id } = req.params;
-  const { username, email } = req.body;
+  const { username, email, password } = req.body;
   try {
     const user = await User.findByPk(id);
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
-    await user.update({ username, email });
+    await user.update({ username, email, password });
     res.json(user);
   } catch (error) {
     console.error(error);
@@ -59,7 +59,7 @@ router.put('/users/:id', async (req, res) => {
 });
 
 // Delete a user by ID
-router.delete('/users/:id', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const user = await User.findByPk(id);

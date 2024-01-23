@@ -4,10 +4,10 @@ const router = express.Router();
 const { Portfolio } = require('../models');
 
 // Get all portfolios
-router.get('/portfolios', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const portfolios = await Portfolio.findAll();
-    res.json(portfolios);
+    res.json(portfolios);    
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -15,7 +15,7 @@ router.get('/portfolios', async (req, res) => {
 });
 
 // Get a specific portfolio by ID
-router.get('/portfolios/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const portfolio = await Portfolio.findByPk(id);
@@ -30,10 +30,10 @@ router.get('/portfolios/:id', async (req, res) => {
 });
 
 // Create a new portfolio
-router.post('/portfolios', async (req, res) => {
-  const { name, description } = req.body;
+router.post('/create', async (req, res) => {
+  const { name, value } = req.body;
   try {
-    const newPortfolio = await Portfolio.create({ name, description });
+    const newPortfolio = await Portfolio.create({ name, value });
     res.status(201).json(newPortfolio);
   } catch (error) {
     console.error(error);
@@ -42,15 +42,15 @@ router.post('/portfolios', async (req, res) => {
 });
 
 // Update an existing portfolio by ID
-router.put('/portfolios/:id', async (req, res) => {
+router.put('/update/:id', async (req, res) => {
   const { id } = req.params;
-  const { name, description } = req.body;
+  const { name, value } = req.body;
   try {
     const portfolio = await Portfolio.findByPk(id);
     if (!portfolio) {
       return res.status(404).json({ error: 'Portfolio not found' });
     }
-    await portfolio.update({ name, description });
+    await portfolio.update({ name, value });
     res.json(portfolio);
   } catch (error) {
     console.error(error);
@@ -59,7 +59,7 @@ router.put('/portfolios/:id', async (req, res) => {
 });
 
 // Delete a portfolio by ID
-router.delete('/portfolios/:id', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const portfolio = await Portfolio.findByPk(id);

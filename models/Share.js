@@ -7,5 +7,9 @@ module.exports = (sequelize) => {
     price: DataTypes.DECIMAL(10, 2),
   });
 
+  Share.associate = (models) => {
+    Share.hasMany(models.Trade); 
+  };
+
   return Share;
 };

@@ -3,7 +3,7 @@ const router = express.Router();
 const { Share } = require('../models');
 
 // Get all shares
-router.get('/shares', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const shares = await Share.findAll();
     res.json(shares);
@@ -14,7 +14,7 @@ router.get('/shares', async (req, res) => {
 });
 
 // Get a single share by ID
-router.get('/shares/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   const shareId = req.params.id;
 
   try {
@@ -32,20 +32,22 @@ router.get('/shares/:id', async (req, res) => {
 });
 
 // Create a new share
-router.post('/shares', async (req, res) => {
+router.post('/create', async (req, res) => {
   const { symbol, price } = req.body;
 
   try {
     const newShare = await Share.create({ symbol, price });
     res.status(201).json(newShare);
+
   } catch (error) {
-    console.error(error);
+    console.error('Error creating share:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
+
 // Update a share by ID
-router.put('/shares/:id', async (req, res) => {
+router.put('/update/:id', async (req, res) => {
   const shareId = req.params.id;
   const { symbol, price } = req.body;
 
@@ -65,7 +67,7 @@ router.put('/shares/:id', async (req, res) => {
 });
 
 // Delete a share by ID
-router.delete('/shares/:id', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
   const shareId = req.params.id;
 
   try {
