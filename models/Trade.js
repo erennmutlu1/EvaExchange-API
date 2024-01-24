@@ -1,4 +1,3 @@
-// src/models/Trade.js
 module.exports = (sequelize, DataTypes) => {
   const Trade = sequelize.define('Trade', {
     type: DataTypes.STRING,
@@ -6,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.DECIMAL(10, 2),
     shareId: {
       type: DataTypes.INTEGER,
-      allowNull: false, // Make sure allowNull is set to false
+      allowNull: false, 
     },
   });
 

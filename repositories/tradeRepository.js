@@ -1,4 +1,3 @@
-// repository/tradeRepository.js
 const { Trade } = require('../models');
 
 class TradeRepository {

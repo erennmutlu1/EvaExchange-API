@@ -1,12 +1,11 @@
 const { Sequelize } = require('sequelize');
 
-// Your existing sequelize setup code
 const sequelize = new Sequelize(
   process.env.DB,
   process.env.USER,
   process.env.PASSWORD, {
     host: process.env.HOST,
-    dialect: process.env.DIALECT, // Add this line to specify the dialect
+    dialect: process.env.DIALECT, 
     operatorsAliases: false,
     pool: {
       max: 10,
@@ -17,7 +16,6 @@ const sequelize = new Sequelize(
   }
 );
 
-// Your existing model definitions
 const Share = require('./Share')(sequelize, Sequelize);
 const Portfolio = require('./Portfolio')(sequelize, Sequelize);
 const Trade = require('./Trade')(sequelize, Sequelize);

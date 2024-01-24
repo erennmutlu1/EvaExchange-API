@@ -1,4 +1,3 @@
-// controllers/tradeController.js
 const tradeRepository = require('../repository/tradeRepository');
 
 class TradeController {
@@ -28,9 +27,10 @@ class TradeController {
   }
 
   async createTrade(req, res) {
-    const { symbol, quantity, price, userId } = req.body;
+    const { type, quantity, price, shareId } = req.body;
+
     try {
-      const newTrade = await tradeRepository.createTrade({ symbol, quantity, price, userId });
+      const newTrade = await tradeRepository.createTrade({ type, quantity, price, shareId });
       res.status(201).json(newTrade);
     } catch (error) {
       console.error(error);
@@ -40,9 +40,10 @@ class TradeController {
 
   async updateTrade(req, res) {
     const { tradeId } = req.params;
-    const { symbol, quantity, price, userId } = req.body;
+    const { type, quantity, price, shareId } = req.body;
+
     try {
-      const trade = await tradeRepository.updateTrade(tradeId, { symbol, quantity, price, userId });
+      const trade = await tradeRepository.updateTrade(tradeId, { type, quantity, price, shareId });
       res.json(trade);
     } catch (error) {
       console.error(error);

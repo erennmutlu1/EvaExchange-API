@@ -1,4 +1,3 @@
-// controllers/portfolioController.js
 const portfolioRepository = require('../repository/portfolioRepository');
 
 class PortfolioController {

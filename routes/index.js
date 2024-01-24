@@ -1,4 +1,3 @@
-// routes/index.js
 const express = require('express');
 const router = express.Router();
 const shareRoutes = require('./shareRoutes');
@@ -19,7 +18,6 @@ router.use('/trades', tradeRoutes);
 // User routes
 router.use('/users', userRoutes);
 
-// Placeholder route for shares
 router.get('/', async (req, res) => {
   try {
     const shares = await Share.findAll();
@@ -29,7 +27,5 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-// Add other placeholder routes for portfolios, trades, and users as needed
 
 module.exports = router;

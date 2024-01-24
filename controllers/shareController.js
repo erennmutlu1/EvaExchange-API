@@ -1,4 +1,3 @@
-// controllers/shareController.js
 const { Share } = require('../models');
 
 const getAllShares = async (req, res) => {

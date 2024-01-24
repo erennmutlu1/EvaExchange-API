@@ -1,4 +1,3 @@
-// repositories/shareRepository.js
 const { Share } = require('../models');
 
 const getAllShares = async () => {

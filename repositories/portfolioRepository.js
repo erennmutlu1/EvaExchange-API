@@ -1,4 +1,3 @@
-// repository/portfolioRepository.js
 const { Portfolio } = require('../models');
 
 class PortfolioRepository {
