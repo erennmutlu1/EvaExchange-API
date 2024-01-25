@@ -66,7 +66,6 @@ router.post('/buy', async (req, res) => {
   }
 });
 
-
 // Create a new trade (SELL operation)
 router.post('/sell', async (req, res) => {
   const { symbol, quantity, portfolioId } = req.body;
