@@ -7,10 +7,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false, 
     },
+    portfolioId: {
+      type: DataTypes.INTEGER,
+      allowNull: false, 
+    },
   });
 
   Trade.associate = (models) => {
     Trade.belongsTo(models.Share, { foreignKey: 'shareId' });
+     //The foreignKey relation added to Portfolio
+     Trade.belongsTo(models.Portfolio, { foreignKey: 'portfolioId' });
   };
 
   return Trade;
