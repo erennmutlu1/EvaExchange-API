@@ -45,7 +45,7 @@ router.post('/buy', async (req, res) => {
     }
 
     // Calculate the total cost based on the latest share price
-    const price = share.price; // Assuming the share model has a 'price' attribute
+    const price = share.price;
     const totalCost = quantity * price;
 
     // Check if the user has sufficient funds in the portfolio
@@ -55,8 +55,8 @@ router.post('/buy', async (req, res) => {
 
     // Create a new BUY trade
     const newTrade = await Trade.create({ type: 'BUY', quantity, price, shareId: share.id, portfolioId });
-    
-    // Update the portfolio value
+
+    // Update the portfolio value by subtracting the total cost
     await portfolio.update({ value: portfolio.value - totalCost });
 
     res.status(201).json(newTrade);
@@ -66,14 +66,14 @@ router.post('/buy', async (req, res) => {
   }
 });
 
+
 // Create a new trade (SELL operation)
 router.post('/sell', async (req, res) => {
   const { symbol, quantity, portfolioId } = req.body;
 
-  // Assuming the value is provided in the request body as a numeric value
   const numericValue = parseFloat(req.body.value);
 
-  // Check numeric value
+  // Check numeric value in request body
   if (isNaN(numericValue)) {
     return res.status(400).json({ error: 'Invalid numeric value for portfolio value' });
   }
@@ -105,20 +105,18 @@ router.post('/sell', async (req, res) => {
 
     const remainingQuantity = totalUserShares - quantity;
 
-    // Used for debugging
-    // console.log('userShares:', userShares);
-    // console.log('quantity:', quantity);
-    // console.log('remainingQuantity:', remainingQuantity);
-
     if (remainingQuantity < 0) {
       return res.status(400).json({ error: `Insufficient shares in the portfolio for selling. Remaining quantity: ${remainingQuantity}` });
     }
 
-    // Create a new SELL trade
-    const newTrade = await Trade.create({ type: 'SELL', quantity, price: share.price, shareId: share.id, portfolioId });
+    // Get the latest share price
+    const latestSharePrice = share.price; 
 
-    // Update the portfolio value
-    await portfolio.update({ value: numericValue });
+    // Create a new SELL trade with the accurate share price
+    const newTrade = await Trade.create({ type: 'SELL', quantity, price: latestSharePrice, shareId: share.id, portfolioId });
+
+    // Update the portfolio value based on the sell operation
+    await portfolio.update({ value: portfolio.value + (latestSharePrice * quantity) });
 
     res.status(201).json(newTrade);
   } catch (error) {
@@ -126,6 +124,7 @@ router.post('/sell', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 // Update an existing trade by ID (Note: Update for both BUY and SELL can be handled similarly)
 router.put('/update/:id', async (req, res) => {
