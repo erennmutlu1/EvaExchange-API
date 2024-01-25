@@ -22,7 +22,7 @@ EvaExchange-API is a Node.js-based API for managing trades and portfolios in a s
 1. Clone the repository:
 
    ```bash
-   git clone [https://github.com/your-username/evaExchange-API.git]https://github.com/erennmutlu1/EvaExchange-API.git
+   git clone https://github.com/erennmutlu1/EvaExchange-API.git
 
 -cd evaExchange-API
 -npm install
