@@ -24,13 +24,13 @@ EvaExchange-API is a Node.js-based API for managing trades and portfolios in a s
    ```bash
    git clone https://github.com/erennmutlu1/EvaExchange-API.git
 
--cd evaExchange-API
--npm install
--Set up the database:
-  -Create a PostgreSQL database.
-  -Update the database configuration in config/config.json.
-  -Run migrations:
+- cd evaExchange-API
+- npm install
+- Set up the database:
+  - Create a PostgreSQL database.
+  - Update the database configuration in config/config.json.
+  - Run migrations:
     npx sequelize-cli db:migrate
--npm start
+- npm start
 
 The API will be accessible at http://localhost:3000 by default.
