@@ -14,7 +14,7 @@ EvaExchange-API is a Node.js-based API for managing trades and portfolios in a s
 - **Buy Operation**: Execute buy operations for shares.
 - **Sell Operation**: Execute sell operations for owned shares in a portfolio.
 - **Trade History**: View a history of executed trades.
-- **Portfolio Management**: Manage portfolios with real-time value updates.
+- **Portfolio And Share Management**: Manage portfolios and shares with real-time value updates.
 
 
 ### Installation
